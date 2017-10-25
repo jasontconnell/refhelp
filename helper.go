@@ -1,4 +1,4 @@
-package reflecthelper
+package refhelp
 
 import (
     "fmt"
