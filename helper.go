@@ -46,7 +46,16 @@ func Join(destination interface{}, source interface{}) interface{} {
 				for _, key := range fSource.MapKeys() {
 					fDest.SetMapIndex(key, fSource.MapIndex(key))
 				}
+			case reflect.Struct:
+				for dfi := 0; dfi < fSource.NumField(); dfi++ {
+					sfv := fSource.Field(dfi)
+					dfv := fDest.Field(dfi)
+					if dfv.CanSet() {
+						dfv.Set(sfv)
+					}
+				}
 			default:
+
 				fmt.Println(fSource.Kind())
 			}
 		} else {
